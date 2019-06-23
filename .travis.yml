@@ -29,7 +29,7 @@ script:
     -configuration Debug
     CODE_SIGN_IDENTITY=""
     CODE_SIGNING_REQUIRED=NO
-    CODE_SIGNING_ALLOWED=YES
+    CODE_SIGNING_ALLOWED=YES | xcpretty -c
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -X llvm-cov -J "$SCHEME"
