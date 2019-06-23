@@ -1,0 +1,31 @@
+language: objective-c
+osx_image: xcode11
+sudo: false
+
+env:
+  global:
+    - WORKSPACE="XcodeGenExample.xcworkspace"
+    - SDK="iphonesimulator13.0"
+    - DESTINATION="platform=iOS Simulator,name=iPhone XS,OS=13.0"
+  matrix:
+    - SCHEME="MyApp"
+    - SCHEME="MyServices"
+    - SCHEME="MyUtils"
+
+install:
+  - brew install xcodegen
+  - make project
+
+script:
+  - set -o pipefail && xcodebuild test
+    -workspace "$WORKSPACE"
+    -scheme "$SCHEME"
+    -sdk "$SDK"
+    -destination "$DESTINATION"
+    -configuration Debug
+    CODE_SIGN_IDENTITY=""
+    CODE_SIGNING_REQUIRED=NO
+    CODE_SIGNING_ALLOWED=YES
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -X llvm-cov -J "$SCHEME"
