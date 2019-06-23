@@ -16,8 +16,7 @@ cache:
   - cocoapods
 
 install:
-  - brew update
-  - brew install xcodegen
+  - brew ls --versions xcodegen || brew install xcodegen
   - pod repo update
   - make project
 
