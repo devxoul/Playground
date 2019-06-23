@@ -1,0 +1,32 @@
+name: XcodeGenExample
+options:
+  bundleIdPrefix: kr.xoul.XcodeGenExample
+  deploymentTarget:
+    iOS: 13.0
+  defaultConfig: Release
+  createIntermediateGroups: true
+  tabWidth: 2
+  indentWidth: 2
+
+settings:
+  base:
+    SWIFT_VERSION: 5.0
+    CLANG_ENABLE_MODULES: YES
+    COPY_PHASE_STRIP: NO
+
+  configs:
+    debug:
+      SWIFT_OPTIMIZATION_LEVEL: -Onone
+      ENABLE_TESTABILITY: YES
+      ONLY_ACTIVE_ARCH: YES
+      SWIFT_COMPILATION_MODE: incremental
+
+    release:
+      SWIFT_OPTIMIZATION_LEVEL: -O
+      SWIFT_COMPILATION_MODE: wholemodule
+
+include:
+  - Projects/templates.yml
+  - Projects/MyApp/project.yml
+  - Projects/MyServices/project.yml
+  - Projects/MyUtils/project.yml

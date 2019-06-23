@@ -1,0 +1,12 @@
+targets:
+  MyServices:
+    templates:
+      - Framework
+    dependendies:
+      - sdk: Combine.framework
+      - target: MyUtils
+
+  MyServicesTests:
+    templates: [UnitTest]
+    templateAttributes:
+      testTarget: MyServices
