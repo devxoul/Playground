@@ -2,7 +2,7 @@ name: XcodeGenExample
 options:
   bundleIdPrefix: kr.xoul.XcodeGenExample
   deploymentTarget:
-    iOS: 13.0
+    iOS: 11.0
   defaultConfig: Release
   createIntermediateGroups: true
   tabWidth: 2

@@ -1,4 +1,4 @@
-platform :ios, '13.0'
+platform :ios, '11.0'
 
 use_frameworks!
 inhibit_all_warnings!
@@ -9,7 +9,6 @@ def test_pods()
 end
 
 target 'MyApp' do
-  pod 'CancelBag'
   pod 'SnapKit'
 
   target 'MyAppTests' do

@@ -8,12 +8,9 @@
 
 import UIKit
 import MyServices
-import CancelBag
 
 final class HelloViewController: UIViewController {
   private let helloService: HelloServiceProtocol
-
-  private let cancelBag = CancelBag()
 
   let label: UILabel = UILabel()
 
@@ -41,8 +38,6 @@ final class HelloViewController: UIViewController {
   }
 
   private func fetchGreetingMessage() {
-    self.helloService.hello()
-      .sink { [weak self] in self?.label.text = $0 }
-      .cancel(with: self.cancelBag)
+    self.label.text = self.helloService.hello()
   }
 }

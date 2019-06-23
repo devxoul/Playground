@@ -1,12 +1,12 @@
 language: objective-c
-osx_image: xcode11
+osx_image: xcode10.2
 sudo: false
 
 env:
   global:
     - WORKSPACE="XcodeGenExample.xcworkspace"
-    - SDK="iphonesimulator13.0"
-    - DESTINATION="platform=iOS Simulator,name=iPhone XS,OS=13.0"
+    - SDK="iphonesimulator12.2"
+    - DESTINATION="platform=iOS Simulator,name=iPhone XS,OS=12.2"
   matrix:
     - SCHEME="MyApp"
     - SCHEME="MyServices"

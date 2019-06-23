@@ -5,7 +5,6 @@
 //  Created by Suyeol Jeon on 23/06/2019.
 //
 
-import Combine
 import Nimble
 import Quick
 import MyServices
@@ -13,17 +12,9 @@ import MyServices
 final class HelloServiceSpec: QuickSpec {
   override func spec() {
     describe("hello()") {
-      it("emits a titlecased greeting phrase") {
-        // given
+      it("returns a titlecased greeting phrase") {
         let service = HelloService()
-        var receivedValue: String?
-
-        // when
-        let subscription = service.hello().sink { value in receivedValue = value }
-
-        // then
-        expect(receivedValue) == "Hello, World!"
-        subscription.cancel()
+        expect(service.hello()) == "Hello, World!"
       }
     }
   }

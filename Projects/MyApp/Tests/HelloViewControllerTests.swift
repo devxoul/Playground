@@ -5,7 +5,6 @@
 //  Created by Suyeol Jeon on 23/06/2019.
 //
 
-import Combine
 import XCTest
 import MyServices
 @testable import MyApp
@@ -28,7 +27,7 @@ final class HelloViewControllerTests: XCTestCase {
 private class HelloServiceStub: HelloServiceProtocol {
   var stubbedValue: String?
 
-  func hello() -> AnyPublisher<String, Never> {
-    return Publishers.Just(self.stubbedValue ?? "").eraseToAnyPublisher()
+  func hello() -> String {
+    return self.stubbedValue ?? ""
   }
 }

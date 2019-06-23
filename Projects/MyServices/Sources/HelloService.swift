@@ -6,21 +6,18 @@
 //
 
 import Foundation
-import Combine
 
 import MyUtils
 
 public protocol HelloServiceProtocol {
-  func hello() -> AnyPublisher<String, Never>
+  func hello() -> String
 }
 
 public final class HelloService: HelloServiceProtocol {
   public init() {
   }
 
-  public func hello() -> AnyPublisher<String, Never> {
-    return Publishers.Just("hello, world!")
-      .map { $0.titlecased() }
-      .eraseToAnyPublisher()
+  public func hello() -> String {
+    return "hello, world!".titlecased()
   }
 }

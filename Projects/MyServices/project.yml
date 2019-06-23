@@ -3,7 +3,6 @@ targets:
     templates:
       - Framework
     dependendies:
-      - sdk: Combine.framework
       - target: MyUtils
 
   MyServicesTests:
