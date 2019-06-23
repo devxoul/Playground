@@ -13,6 +13,7 @@ env:
     - SCHEME="MyUtils"
 
 install:
+  - brew update
   - brew install xcodegen
   - make project
 
