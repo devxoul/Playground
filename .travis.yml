@@ -20,7 +20,7 @@ cache:
 
 install:
   - bundle install
-  - brew ls --versions xcodegen || brew install xcodegen
+  - brew link xcodegen || brew install xcodegen
   - make project
 
 script:
