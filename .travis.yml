@@ -13,9 +13,11 @@ env:
     - SCHEME="MyUtils"
 
 cache:
+  - bundler
   - cocoapods
 
 install:
+  - bundle install
   - brew ls --versions xcodegen || brew install xcodegen
   - make project
 
@@ -31,4 +33,9 @@ script:
     CODE_SIGNING_ALLOWED=YES | xcpretty -c
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -X llvm-cov -J "$SCHEME" -F "$SCHEME"
+  - slather coverage
+    --workspace XcodeGenExample.xcworkspace
+    --scheme "$SCHEME"
+    --cobertura-xml
+    XcodeGenExample.xcodeproj
+  - bash <(curl -s https://codecov.io/bash) -f cobertura.xml -X coveragepy -X gcov -X xcode
