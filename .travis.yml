@@ -12,6 +12,9 @@ env:
     - SCHEME="MyServices"
     - SCHEME="MyUtils"
 
+cache:
+  - cocoapods
+
 install:
   - brew update
   - brew install xcodegen
