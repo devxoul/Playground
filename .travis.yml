@@ -15,6 +15,8 @@ env:
 cache:
   - bundler
   - cocoapods
+  - directories:
+    - /usr/local/Cellar
 
 install:
   - bundle install
