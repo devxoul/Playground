@@ -31,4 +31,4 @@ script:
     CODE_SIGNING_ALLOWED=YES | xcpretty -c
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -X llvm-cov -F "$SCHEME"
+  - bash <(curl -s https://codecov.io/bash) -X llvm-cov -J "$SCHEME" -F "$SCHEME"
