@@ -18,6 +18,7 @@ cache:
 install:
   - brew update
   - brew install xcodegen
+  - pod repo update
   - make project
 
 script:
