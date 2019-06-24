@@ -16,7 +16,7 @@ cache:
   - bundler
   - cocoapods
   - directories:
-    - /usr/local/Cellar
+    - /usr/local/Cellar/xcodegen
 
 install:
   - bundle install
