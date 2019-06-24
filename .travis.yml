@@ -19,8 +19,8 @@ cache:
     - /usr/local/Cellar/xcodegen
 
 install:
-  - bundle install
   - brew link xcodegen || brew install xcodegen
+  - bundle install --path vendor/bundle
   - make project
 
 script:
