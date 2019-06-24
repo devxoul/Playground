@@ -1,7 +1,9 @@
+require "digest"
 require "yaml"
 
 
-SPEC_REPO_DIR = `echo $HOME/.cocoapods/repos/master/Specs`.strip()
+ORIGINAL_SPEC_REPO_DIR = `echo $HOME/.cocoapods/repos/master/Specs`.strip()
+PARTIAL_SPEC_REPO_DIR = "Specs"
 
 
 def main()
@@ -20,21 +22,23 @@ end
 
 
 def save()
-  spec_dirs = get_spec_dirs()
-  spec_dirs.each do |spec_dir|
-    local_dir = get_local_dir(spec_dir)
-    `mkdir -p #{local_dir} && cp -R #{spec_dir} #{local_dir}/../`
-    puts "Copy #{spec_dir} -> #{local_dir}"
+  pods = get_pods()
+  pods.each do |pod|
+    original_path = get_original_path(pod)
+    partial_path = get_partial_path(pod)
+    puts "Copy #{original_path} -> #{partial_path}"
+    `mkdir -p #{partial_path} && cp -R #{original_path} #{partial_path}/../`
   end
 end
 
 
 def restore()
-  spec_dirs = get_spec_dirs()
-  spec_dirs.each do |spec_dir|
-    local_dir = get_local_dir(spec_dir)
-    `mkdir -p #{spec_dir} && cp -R #{local_dir} #{spec_dir}`
-    puts "Copy #{local_dir} -> #{spec_dir}"
+  pods = get_pods()
+  pods.each do |pod|
+    original_path = get_original_path(pod)
+    partial_path = get_partial_path(pod)
+    puts "Copy #{partial_path} -> #{original_path}"
+    `mkdir -p #{original_path} && cp -R #{partial_path} #{original_path}/../`
   end
 end
 
@@ -44,21 +48,25 @@ def help()
 end
 
 
-def get_spec_dirs()
+def get_pods()
   lockfile = YAML.load(File.read("./Podfile.lock"))
   pods = lockfile["SPEC REPOS"]["https://github.com/cocoapods/specs.git"]
-
-  find_args = pods.map { |pod| "-name #{pod}" }.join(" -o ")
-  spec_dirs = `find #{SPEC_REPO_DIR} #{find_args}`.strip().split("\n")
-
-  return spec_dirs.map { |dir| dir.strip() }
+  return pods
 end
 
 
-def get_local_dir(spec_dir)
-  base_dir = `echo #{SPEC_REPO_DIR}`.strip()
-  shard_dir = spec_dir.split(base_dir)[1]  # /7/7/7/ReactorKit
-  return "Specs#{shard_dir}"  # Specs/7/7/7/ReactorKit
+def get_original_path(pod)
+  return "#{ORIGINAL_SPEC_REPO_DIR}/#{get_shard_prefix(pod)}/#{pod}"
+end
+
+
+def get_partial_path(pod)
+  return "#{PARTIAL_SPEC_REPO_DIR}/#{get_shard_prefix(pod)}/#{pod}"
+end
+
+
+def get_shard_prefix(pod)
+  return Digest::MD5.hexdigest(pod)[0...3].split("").join("/")
 end
 
 
