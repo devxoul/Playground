@@ -21,7 +21,7 @@ cache:
 
 install:
   - brew link xcodegen || brew install xcodegen
-  - bundle install --path vendor/bundle
+  - bundle update && bundle install --path vendor/bundle
   - bundle exec cocoacache restore
   - make project
 
