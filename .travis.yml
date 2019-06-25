@@ -42,7 +42,7 @@ after_success:
     --scheme "$SCHEME"
     --cobertura-xml
     XcodeGenExample.xcodeproj
-  - bash <(curl -s https://codecov.io/bash) -f cobertura.xml -X coveragepy -X gcov -X xcode
+  - bash <(curl -s https://codecov.io/bash) -f cobertura.xml -X coveragepy -X gcov -X xcode -F "$SCHEME"
 
 before_cache:
   - bundle exec save
