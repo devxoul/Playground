@@ -19,12 +19,10 @@ cache:
     - /usr/local/Cellar/xcodegen
     - Specs
 
-before_install:
-  - ruby Scripts/cache_cocoapods.rb restore
-
 install:
   - brew link xcodegen || brew install xcodegen
   - bundle install --path vendor/bundle
+  - bundle exec cocoacache restore
   - make project
 
 script:
@@ -47,4 +45,4 @@ after_success:
   - bash <(curl -s https://codecov.io/bash) -f cobertura.xml -X coveragepy -X gcov -X xcode
 
 before_cache:
-  - ruby Scripts/cache_cocoapods.rb save
+  - bundle exec save
