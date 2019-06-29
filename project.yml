@@ -5,6 +5,7 @@ options:
     iOS: 11.0
   defaultConfig: Release
   createIntermediateGroups: true
+  transitivelyLinkDependencies: true
   tabWidth: 2
   indentWidth: 2
 
