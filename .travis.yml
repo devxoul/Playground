@@ -5,12 +5,8 @@ sudo: false
 env:
   global:
     - WORKSPACE="XcodeGenExample.xcworkspace"
-    - SDK="iphonesimulator12.2"
-    - DESTINATION="platform=iOS Simulator,name=iPhone XS,OS=12.2"
-  matrix:
-    - SCHEME="MyApp"
-    - SCHEME="MyServices"
-    - SCHEME="MyUtils"
+    - PROJECT="XcodeGenExample.xcodeproj"
+    - SCHEME="AllTests"
 
 cache:
   - bundler
@@ -36,7 +32,7 @@ after_success:
     --workspace XcodeGenExample.xcworkspace
     --scheme "$SCHEME"
     --cobertura-xml
-    XcodeGenExample.xcodeproj
+    "$PROJECT"
   - bash <(curl -s https://codecov.io/bash) -f cobertura.xml -X coveragepy -X gcov -X xcode
 
 before_cache:

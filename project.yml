@@ -26,6 +26,20 @@ settings:
       SWIFT_OPTIMIZATION_LEVEL: -O
       SWIFT_COMPILATION_MODE: wholemodule
 
+schemes:
+  AllTests:
+    build:
+      targets:
+        MyApp: test
+        MyServices: test
+        MyUtils: test
+    test:
+      gatherCoverageData: true
+      targets:
+        - MyAppTests
+        - MyServicesTests
+        - MyUtilsTests
+
 include:
   - Projects/templates.yml
   - Projects/MyApp/project.yml
