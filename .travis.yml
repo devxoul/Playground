@@ -28,7 +28,7 @@ script:
     --device "iPhone Xs"
 
 after_success:
-  - slather coverage
+  - bundle exec slather coverage
     --workspace XcodeGenExample.xcworkspace
     --scheme "$SCHEME"
     --cobertura-xml
