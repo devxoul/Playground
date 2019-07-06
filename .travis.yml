@@ -26,15 +26,10 @@ install:
   - make project
 
 script:
-  - set -o pipefail && xcodebuild test
-    -workspace "$WORKSPACE"
-    -scheme "$SCHEME"
-    -sdk "$SDK"
-    -destination "$DESTINATION"
-    -configuration Debug
-    CODE_SIGN_IDENTITY=""
-    CODE_SIGNING_REQUIRED=NO
-    CODE_SIGNING_ALLOWED=YES | xcpretty -c
+  - bundle exec fastlane scan
+    --workspace "$WORKSPACE"
+    --scheme "$SCHEME"
+    --device "iPhone Xs"
 
 after_success:
   - slather coverage
