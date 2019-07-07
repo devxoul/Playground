@@ -36,4 +36,4 @@ after_success:
   - bash <(curl -s https://codecov.io/bash) -f cobertura.xml -X coveragepy -X gcov -X xcode
 
 before_cache:
-  - bundle exec save
+  - cocoacache save
