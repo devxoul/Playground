@@ -13,6 +13,18 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
+    - name: Restore Bundler Cache
+      uses: actions/download-artifact@master
+      with:
+        name: cache-bundler
+        path: vendor/bundle
+
+    - name: Restore CocoaPods Cache
+      uses: actions/download-artifact@master
+      with:
+        name: cache-cocoapods
+        path: Pods
+
     - name: Install XcodeGen
       run: brew link xcodegen || brew install xcodegen
 
@@ -48,3 +60,15 @@ jobs:
           -X gcov \
           -X xcode \
           -t 60f66a56-0399-4e79-b741-8b81f02df68f
+
+    - name: Save Bundler Cache
+      uses: actions/upload-artifact@master
+      with:
+        name: cache-bundler
+        path: vendor/bundle
+
+    - name: Save CocoaPods Cache
+      uses: actions/upload-artifact@master
+      with:
+        name: cache-cocoapods
+        path: Pods
