@@ -1,6 +1,6 @@
-name: XcodeGenExample
+name: Playground
 options:
-  bundleIdPrefix: kr.xoul.XcodeGenExample
+  bundleIdPrefix: kr.xoul.Playground
   deploymentTarget:
     iOS: 11.0
   defaultConfig: Release

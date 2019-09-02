@@ -1,6 +1,6 @@
 //
 //  String+QuestionTests.swift
-//  XcodeGenExample
+//  Playground
 //
 //  Created by Suyeol Jeon on 23/06/2019.
 //

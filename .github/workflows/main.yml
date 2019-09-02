@@ -21,7 +21,7 @@ jobs:
     - name: Build and Test
       run: |
         bundle exec fastlane scan \
-          --workspace "XcodeGenExample.xcworkspace" \
+          --workspace "Playground.xcworkspace" \
           --scheme "AllTests" \
           --device "iPhone Xs" \
           | grep --line-buffered -v "\[MT\]"
@@ -29,10 +29,10 @@ jobs:
     - name: Upload Code Coverage
       run: |
         bundle exec slather coverage \
-          --workspace XcodeGenExample.xcworkspace \
+          --workspace Playground.xcworkspace \
           --scheme "AllTests" \
           --cobertura-xml \
-          "XcodeGenExample.xcodeproj"
+          "Playground.xcodeproj"
         bash <(curl -s https://codecov.io/bash) \
           -f cobertura.xml \
           -X coveragepy \

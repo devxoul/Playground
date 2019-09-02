@@ -1,8 +1,12 @@
-# XcodeGenExample
+# Playground
 
-An example project using [XcodeGen](https://github.com/yonaskolb/XcodeGen).
+A playground for an ideal project.
+
+* [GitHub Actions](https://github.com/features/actions)
+* [XcodeGen](https://github.com/yonaskolb/XcodeGen)
+* [Codecov](https://codecov.io)
 
 ```console
 $ make project
-$ open XcodeGenExample.xcworkspace
+$ open Playground.xcworkspace
 ```
