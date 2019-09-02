@@ -1,0 +1,41 @@
+name: CI
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: macOS-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Install XcodeGen
+      run: brew link xcodegen || brew install xcodegen
+
+    - name: Install Ruby Dependencies
+      run: bundle install --path vendor/bundle
+
+    - name: Generate Xcode Project
+      run: make project
+
+    - name: Build and Test
+      run: |
+        bundle exec fastlane scan \
+          --workspace "XcodeGenExample.xcworkspace" \
+          --scheme "AllTests" \
+          --device "iPhone Xs" \
+          | grep --line-buffered -v "\[MT\]"
+
+    - name: Upload Code Coverage
+      run: |
+        bundle exec slather coverage \
+          --workspace XcodeGenExample.xcworkspace \
+          --scheme "AllTests" \
+          --cobertura-xml \
+          "XcodeGenExample.xcodeproj"
+        bash <(curl -s https://codecov.io/bash) \
+          -f cobertura.xml \
+          -X coveragepy \
+          -X gcov \
+          -X xcode \
+          -t 60f66a56-0399-4e79-b741-8b81f02df68f
