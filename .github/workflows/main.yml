@@ -30,15 +30,6 @@ jobs:
           | grep --line-buffered -v "\[MT\]"
 
     - name: Upload Code Coverage
-      run: |
-        bundle exec slather coverage \
-          --workspace Playground.xcworkspace \
-          --scheme "AllTests" \
-          --cobertura-xml \
-          "Playground.xcodeproj"
-        bash <(curl -s https://codecov.io/bash) \
-          -f cobertura.xml \
-          -X coveragepy \
-          -X gcov \
-          -X xcode \
-          -t 60f66a56-0399-4e79-b741-8b81f02df68f
+      uses: codecov/codecov-action@v1.0.2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
