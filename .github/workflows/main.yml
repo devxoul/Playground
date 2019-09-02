@@ -5,7 +5,13 @@ on: [pull_request]
 jobs:
   test:
     runs-on: macOS-latest
-    
+
+    env:
+      WORKSPACE: Playground.xcworkspace
+      PROJECT: Playground.xcodeproj
+      SDK: iphonesimulator12.2
+      SCHEME: AllTests
+
     steps:
     - uses: actions/checkout@v1
 
@@ -24,18 +30,19 @@ jobs:
     - name: Build and Test
       run: |
         bundle exec fastlane scan \
-          --workspace "Playground.xcworkspace" \
-          --scheme "AllTests" \
+          --workspace "${WORKSPACE}" \
+          --scheme "${SCHEME}" \
+          --sdk "$SDK"
           --device "iPhone Xs" \
           | grep --line-buffered -v "\[MT\]"
 
     - name: Upload Code Coverage
       run: |
         bundle exec slather coverage \
-          --workspace Playground.xcworkspace \
-          --scheme "AllTests" \
+          --workspace "${WORKSPACE}" \
+          --scheme "${SCHEME}" \
           --cobertura-xml \
-          "Playground.xcodeproj"
+          "${PROJECT}"
         bash <(curl -s https://codecov.io/bash) \
           -f cobertura.xml \
           -X coveragepy \
