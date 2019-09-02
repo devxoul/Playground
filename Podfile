@@ -10,6 +10,7 @@ end
 
 target 'MyApp' do
   pod 'SnapKit'
+  pod 'SwiftLint'
 
   target 'MyAppTests' do
     inherit! :search_paths
