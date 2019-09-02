@@ -24,6 +24,7 @@ jobs:
       with:
         name: cache-cocoapods
         path: Pods
+      if: always()
 
     - name: Install XcodeGen
       run: brew link xcodegen || brew install xcodegen
