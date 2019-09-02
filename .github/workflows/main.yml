@@ -18,6 +18,9 @@ jobs:
     - name: Generate Xcode Project
       run: make project
 
+    - name: Run Danger
+      run: bundle exec danger
+
     - name: Build and Test
       run: |
         bundle exec fastlane scan \

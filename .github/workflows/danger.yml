@@ -1,0 +1,13 @@
+name: danger
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: macOS-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Danger
+      run: bundle exec danger
