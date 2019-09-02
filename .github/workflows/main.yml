@@ -13,20 +13,21 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    # - name: Restore Bundler Cache
-    #   uses: actions/download-artifact@master
-    #   with:
-    #     name: cache-bundler
-    #     path: vendor/bundle
+    - name: Restore Bundler Cache
+      uses: actions/download-artifact@master
+      with:
+        name: cache-bundler
+        path: vendor/bundle
 
-    # - name: Restore CocoaPods Cache
-    #   uses: actions/download-artifact@master
-    #   with:
-    #     name: cache-cocoapods
-    #     path: Pods
+    - name: Restore CocoaPods Cache
+      uses: actions/download-artifact@master
+      with:
+        name: cache-cocoapods
+        path: Pods
 
     - name: Install XcodeGen
       run: brew link xcodegen || brew install xcodegen
+      if: always()
 
     - name: Install Ruby Dependencies
       run: bundle install --path vendor/bundle
