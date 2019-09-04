@@ -33,6 +33,7 @@ jobs:
           --workspace "Playground.xcworkspace" \
           --scheme "AllTests" \
           --device "iPhone Xs" \
+          --output_style rspec \
           | grep --line-buffered -v "\[MT\]"
 
     - name: Upload Code Coverage
