@@ -2,3 +2,5 @@
 *.xcworkspace
 build
 Pods/
+test_output/
+
