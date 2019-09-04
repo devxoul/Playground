@@ -53,5 +53,6 @@ jobs:
           -f cobertura.xml \
           -X coveragepy \
           -X gcov \
-          -X xcode \
-          -t 60f66a56-0399-4e79-b741-8b81f02df68f
+          -X xcode
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
