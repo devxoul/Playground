@@ -39,7 +39,7 @@ jobs:
           | grep --line-buffered -v "SimDevice" \
           | grep --line-buffered -v "IDETestOperationsObserverDebug" \
           | grep --line-buffered -v "iPhoneSupport" \
-          | grep --line-buffered -v "/Library/Developer/Xcode/DerivedData/" \
+          | grep --line-buffered -v "/Diagnostics/" \
           | egrep --line-buffered -v "\} \(\d+\.\d+"
 
     - name: Upload Code Coverage
