@@ -34,7 +34,13 @@ jobs:
           --scheme "AllTests" \
           --device "iPhone Xs" \
           --output_style rspec \
-          | grep --line-buffered -v "\[MT\]"
+          | grep --line-buffered -v "\[MT\]" \
+          | grep --line-buffered -v "DTDeviceKit" \
+          | grep --line-buffered -v "SimDevice" \
+          | grep --line-buffered -v "IDETestOperationsObserverDebug" \
+          | grep --line-buffered -v "iPhoneSupport" \
+          | grep --line-buffered -v "/Library/Developer/Xcode/DerivedData/" \
+          | egrep --line-buffered -v "\} \(\d+\.\d+"
 
     - name: Upload Code Coverage
       run: |
