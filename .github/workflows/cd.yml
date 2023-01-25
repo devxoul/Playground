@@ -45,6 +45,9 @@ jobs:
         with:
           ref: ${{ env.LONG_SHA }}
 
+      - run: echo "LONG_SHA=$LONG_SHA"
+      - run: echo "SHORT_SHA=$SHORT_SHA"
+
       - name: Build
         uses: ./.github/workflows/actions/build
 
