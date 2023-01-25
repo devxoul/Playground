@@ -1,9 +1,0 @@
-targets:
-  MyUtils:
-    templates:
-      - Framework
-
-  MyUtilsTests:
-    templates: [UnitTest]
-    templateAttributes:
-      testTarget: MyUtils
