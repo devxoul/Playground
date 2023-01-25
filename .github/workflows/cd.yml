@@ -21,6 +21,7 @@ on:
         type: choice
         options: [prod, dev]
       sha:
+        type: string
         description: "배포할 커밋 Full SHA"
 
 jobs:
@@ -45,23 +46,29 @@ jobs:
           ref: ${{ env.LONG_SHA }}
 
       - name: Build
-        run: echo "Building $SHORT_SHA..."; echo "Done."
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - run: echo "LONG_SHA=${{ github.event.inputs.sha }}" >> $GITHUB_ENV
-        if: github.event.inputs.sha != ''
-
-      - run: echo "LONG_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
-        if: github.event.inputs.sha == ''
-
-      - run: echo "SHORT_SHA=${LONG_SHA::7}" >> $GITHUB_ENV
-
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ env.LONG_SHA }}
+        uses: ./.github/workflows/build.yml
 
       - name: Deploy
-        run: echo "Deploying $SHORT_SHA..."; echo "Done."
+        uses: ./.github/workflows/deploy.yml
+
+      # - name: Build
+      #   run: echo "Building $SHORT_SHA..."; echo "Done."
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #     - run: echo "LONG_SHA=${{ github.event.inputs.sha }}" >> $GITHUB_ENV
+  #       if: github.event.inputs.sha != ''
+
+  #     - run: echo "LONG_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
+  #       if: github.event.inputs.sha == ''
+
+  #     - run: echo "SHORT_SHA=${LONG_SHA::7}" >> $GITHUB_ENV
+
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         ref: ${{ env.LONG_SHA }}
+
+  #     - name: Deploy
+  #       run: echo "Deploying $SHORT_SHA..."; echo "Done."
