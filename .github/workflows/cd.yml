@@ -25,7 +25,11 @@ on:
 
 jobs:
   build:
-    if: contains(fromJSON('["myapp"]'), github.event.inputs.project)
+    strategy:
+      matrix:
+        project:
+          - myapp
+          - metabase
     runs-on: ubuntu-latest
     steps:
       - run: echo "LONG_SHA=${{ github.event.inputs.sha }}" >> $GITHUB_ENV
