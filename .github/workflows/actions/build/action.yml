@@ -1,0 +1,15 @@
+name: Build
+inputs:
+  project:
+    type: string
+    required: true
+  env:
+    type: string
+    required: true
+  sha:
+    type: string
+    required: true
+runs:
+  steps:
+    - name: Build
+      run: echo "Building ${{ github.event.inputs.project }} ${{ github.event.inputs.env }} ${{ github.event.inputs.sha }}"; echo "Done."
