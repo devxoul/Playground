@@ -24,57 +24,52 @@ on:
         type: string
         description: "배포할 커밋 Full SHA"
 
+strategy:
+  matrix:
+    project:
+      - myapp
+      - metabase
+
 jobs:
   build:
-    strategy:
-      matrix:
-        project:
-          - myapp
-          - metabase
     runs-on: ubuntu-latest
     steps:
-      # - run: echo "LONG_SHA=${{ github.event.inputs.sha }}" >> $GITHUB_ENV
-      #   if: github.event.inputs.sha != ''
+      - run: echo "LONG_SHA=${{ github.event.inputs.sha }}" >> $GITHUB_ENV
+        if: github.event.inputs.sha != ''
 
-      # - run: echo "LONG_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
-      #   if: github.event.inputs.sha == ''
+      - run: echo "LONG_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
+        if: github.event.inputs.sha == ''
 
-      # - run: echo "SHORT_SHA=${LONG_SHA::7}" >> $GITHUB_ENV
-
-      - run: echo "LONG_SHA=${{ github.event.inputs.sha != '' ? github.event.inputs.sha : GITHUB_SHA }}" >> $GITHUB_ENV
       - run: echo "SHORT_SHA=${LONG_SHA::7}" >> $GITHUB_ENV
 
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ env.LONG_SHA }}
+      # - uses: actions/checkout@v3
+      #   with:
+      #     ref: ${{ env.LONG_SHA }}
 
-      - run: echo "LONG_SHA=$LONG_SHA"
-      - run: echo "SHORT_SHA=$SHORT_SHA"
-
-      - name: Build
-        uses: ./.github/workflows/actions/build
+      # - name: Build
+      #   uses: ./.github/workflows/actions/build
 
       # - name: Deploy
       #   uses: ./.github/workflows/deploy.yml
 
-      # - name: Build
-      #   run: echo "Building $SHORT_SHA..."; echo "Done."
+      - name: Build
+        run: echo "Building $SHORT_SHA..."; echo "Done."
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   steps:
-  #     - run: echo "LONG_SHA=${{ github.event.inputs.sha }}" >> $GITHUB_ENV
-  #       if: github.event.inputs.sha != ''
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - run: echo "LONG_SHA=${{ github.event.inputs.sha }}" >> $GITHUB_ENV
+        if: github.event.inputs.sha != ''
 
-  #     - run: echo "LONG_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
-  #       if: github.event.inputs.sha == ''
+      - run: echo "LONG_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
+        if: github.event.inputs.sha == ''
 
-  #     - run: echo "SHORT_SHA=${LONG_SHA::7}" >> $GITHUB_ENV
+      - run: echo "SHORT_SHA=${LONG_SHA::7}" >> $GITHUB_ENV
 
-  #     - uses: actions/checkout@v3
-  #       with:
-  #         ref: ${{ env.LONG_SHA }}
+      # - uses: actions/checkout@v3
+      #   with:
+      #     ref: ${{ env.LONG_SHA }}
 
-  #     - name: Deploy
-  #       run: echo "Deploying $SHORT_SHA..."; echo "Done."
+      - name: Deploy
+        run: echo "Deploying $SHORT_SHA..."; echo "Done."
