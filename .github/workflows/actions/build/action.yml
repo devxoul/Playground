@@ -10,6 +10,7 @@ inputs:
     type: string
     required: true
 runs:
+  using: composite
   steps:
     - name: Build
       run: echo "Building ${{ github.event.inputs.project }} ${{ github.event.inputs.env }} ${{ github.event.inputs.sha }}"; echo "Done."
