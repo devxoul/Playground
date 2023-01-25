@@ -46,10 +46,10 @@ jobs:
           ref: ${{ env.LONG_SHA }}
 
       - name: Build
-        uses: ./.github/workflows/build.yml
+        uses: ./.github/workflows/actions/build
 
-      - name: Deploy
-        uses: ./.github/workflows/deploy.yml
+      # - name: Deploy
+      #   uses: ./.github/workflows/deploy.yml
 
       # - name: Build
       #   run: echo "Building $SHORT_SHA..."; echo "Done."
