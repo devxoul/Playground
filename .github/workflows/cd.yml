@@ -39,7 +39,9 @@ jobs:
       # - run: echo "LONG_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
       #   if: github.event.inputs.sha == ''
 
-      - run: echo "LONG_SHA=${{ github.event.inputs.sha != '' && github.event.inputs.sha || env.GITHUB_SHA }}" >> $GITHUB_ENV
+      # - run: echo "SHORT_SHA=${LONG_SHA::7}" >> $GITHUB_ENV
+
+      - run: echo "LONG_SHA=${{ github.event.inputs.sha != '' ? github.event.inputs.sha : GITHUB_SHA }}" >> $GITHUB_ENV
       - run: echo "SHORT_SHA=${LONG_SHA::7}" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3
